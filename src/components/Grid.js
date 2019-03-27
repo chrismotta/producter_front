@@ -25,8 +25,8 @@ addProducts(50);
 class Grid extends Component {
     render() {
         return (
-            <BootstrapTable data={ products }>
-                <TableHeaderColumn dataField='factura' isKey={ true } dataSort={ true }>Product ID</TableHeaderColumn>
+            <BootstrapTable data={products} striped hover>
+                <TableHeaderColumn dataField='factura' isKey={ true } dataSort={ true }>Factura No.</TableHeaderColumn>
                 <TableHeaderColumn dataField='datos'>Datos Personales</TableHeaderColumn>
                 <TableHeaderColumn dataField='caracteristicas'>Caracteristocas</TableHeaderColumn>
                 <TableHeaderColumn dataField='pago'>Pago</TableHeaderColumn>
