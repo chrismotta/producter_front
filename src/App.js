@@ -6,11 +6,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import "react-datepicker/dist/react-datepicker.css";
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIgloo } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faListAlt, faCubes, faPrint, faScrewdriver } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faIgloo);
+library.add( faListAlt, faCubes, faPrint, faScrewdriver );
 
 class App extends Component {
 

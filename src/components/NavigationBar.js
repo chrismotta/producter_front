@@ -11,7 +11,7 @@ class NavigationBar extends Component {
     
     render() {
         return (
-            <Navbar bg="secondary" variant="dark" sticky="top" style={{
+            <Navbar bg="dark" variant="dark" sticky="top" style={{
                 backgroundImage: `url(${logo})`,
                 backgroundBlendMode: 'lighten',
                 backgroundSize: "85px",
@@ -20,17 +20,18 @@ class NavigationBar extends Component {
             }}>
                 <Navbar.Brand href="#home" style={{width:"70px"}}>
                 </Navbar.Brand>
-                <Nav className="mr-auto" activeKey="calendario">
-                    <Nav.Link href="#calendario" eventKey="calendario">
-                    <FontAwesomeIcon icon="igloo" /> Calendario</Nav.Link>
-                    <Nav.Link href="#general" eventKey="general">General</Nav.Link>
-                    <Nav.Link href="#stock" eventKey="stock">Stock</Nav.Link>
-                    <Nav.Link href="#stock" eventKey="imprimir">Imprimir</Nav.Link>
+                <Nav className="mr-auto" activeKey="listado">
+                    <Nav.Link href="#listado" eventKey="listado">
+                    <FontAwesomeIcon icon="list-alt" /> Listado</Nav.Link>
+                    <Nav.Link href="#stock" eventKey="stock">
+                        <FontAwesomeIcon icon="cubes" /> Stock</Nav.Link>
+                    <Nav.Link href="#stock" eventKey="imprimir">
+                        <FontAwesomeIcon icon="print" /> Imprimir</Nav.Link>
                 </Nav>
-                    <Button variant="outline-light" className="float-right" style={{marginRight:"20px"}}>Nueva Factura</Button>
+                    <Button variant="outline-info" className="float-right" style={{marginRight:"20px"}}>Nueva Factura</Button>
                 <Form inline>
                     <FormControl type="text" placeholder="Factura No." className="mr-sm-2" />
-                    <Button variant="outline-light">Buscar</Button>
+                    <Button variant="outline-info">Buscar</Button>
                 </Form>
             </Navbar>
         );

@@ -41,7 +41,7 @@ class FooterDock extends Component {
                 >
                     <Nav.Item>
                         <Nav.Link 
-                            className="bg-secondary text-white"
+                            className="bg-dark text-info"
                             eventKey="foot"
                             onClick={() => this.setState({ 
                                 isVisibleFooter: !this.state.isVisibleFooter 

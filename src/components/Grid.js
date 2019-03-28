@@ -22,11 +22,28 @@ function addProducts(quantity) {
 
 addProducts(50);
 
+const selectRowProp = {
+    mode: 'checkbox',
+    bgColor: 'pink',
+    showOnlySelected: true
+};
+  
+
 class Grid extends Component {
     render() {
         return (
-            <BootstrapTable data={products} striped hover>
-                <TableHeaderColumn dataField='factura' isKey={ true } dataSort={ true }>Factura No.</TableHeaderColumn>
+            <div style={{padding:"10px"}}>
+            <BootstrapTable 
+                ref='table' 
+                data={products} 
+                selectRow={selectRowProp} 
+                striped 
+                hover
+                insertRow={ true }
+                deleteRow={ true }
+                search={ true } 
+                >
+                <TableHeaderColumn dataField='factura' isKey={true} dataSort={true}>Factura No.</TableHeaderColumn>
                 <TableHeaderColumn dataField='datos'>Datos Personales</TableHeaderColumn>
                 <TableHeaderColumn dataField='caracteristicas'>Caracteristocas</TableHeaderColumn>
                 <TableHeaderColumn dataField='pago'>Pago</TableHeaderColumn>
@@ -35,8 +52,9 @@ class Grid extends Component {
                 <TableHeaderColumn dataField='expreso'>Expreso</TableHeaderColumn>
                 <TableHeaderColumn dataField='acciones'></TableHeaderColumn>
             </BootstrapTable>
+            </div>
         );
     }
 }
-  
+
 export default Grid;
