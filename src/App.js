@@ -7,9 +7,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faListAlt, faCubes, faPrint, faScrewdriver } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt, faCubes, faPrint, faScrewdriver, faTrashAlt, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
-library.add( faListAlt, faCubes, faPrint, faScrewdriver );
+library.add( faListAlt, faCubes, faPrint, faScrewdriver, faTrashAlt, faPaperclip );
 
 class App extends Component {
 

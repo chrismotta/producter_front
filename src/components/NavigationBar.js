@@ -6,6 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import logo from '../img/logo.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListAlt, faCubes, faPrint, faUser } from '@fortawesome/free-solid-svg-icons';
 
 class NavigationBar extends Component {
     
@@ -22,17 +23,21 @@ class NavigationBar extends Component {
                 </Navbar.Brand>
                 <Nav className="mr-auto" activeKey="listado">
                     <Nav.Link href="#listado" eventKey="listado">
-                    <FontAwesomeIcon icon="list-alt" /> Listado</Nav.Link>
+                        <FontAwesomeIcon icon={faListAlt} /> Listado</Nav.Link>
                     <Nav.Link href="#stock" eventKey="stock">
-                        <FontAwesomeIcon icon="cubes" /> Stock</Nav.Link>
+                        <FontAwesomeIcon icon={faCubes} /> Stock</Nav.Link>
                     <Nav.Link href="#stock" eventKey="imprimir">
-                        <FontAwesomeIcon icon="print" /> Imprimir</Nav.Link>
+                        <FontAwesomeIcon icon={faPrint} /> Imprimir</Nav.Link>
                 </Nav>
-                    <Button variant="outline-info" className="float-right" style={{marginRight:"20px"}}>Nueva Factura</Button>
+                <Button variant="outline-info" className="float-right" style={{marginRight:"20px"}}>Nueva Factura</Button>
                 <Form inline>
                     <FormControl type="text" placeholder="Factura No." className="mr-sm-2" />
                     <Button variant="outline-info">Buscar</Button>
                 </Form>
+                <span className="float-right text-info" style={{marginLeft:"20px"}}>
+                    <FontAwesomeIcon icon={faUser} />
+                    <span style={{marginLeft:"10px"}}>Motta, Christian</span>
+                </span>
             </Navbar>
         );
     }
