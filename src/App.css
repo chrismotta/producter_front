@@ -51,6 +51,12 @@
 .icon-right-margin {
   margin-right: 5px;
 } 
+.icon-botton-margin {
+  margin-bottom: 5px;
+}
 .text-disabled {
   color: #CCC;
+}
+.bg-dark {
+  background-color: #606!important;
 }

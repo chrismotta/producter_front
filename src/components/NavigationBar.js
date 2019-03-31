@@ -36,7 +36,7 @@ class NavigationBar extends Component {
                 </Form>
                 <span className="float-right text-info" style={{marginLeft:"20px"}}>
                     <FontAwesomeIcon icon={faUser} />
-                    <span style={{marginLeft:"10px"}}>Motta, Christian</span>
+                    <span style={{marginLeft:"10px"}}>Garbini, Jazmin</span>
                 </span>
             </Navbar>
         );
