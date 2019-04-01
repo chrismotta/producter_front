@@ -4,8 +4,8 @@ import { faInfoCircle, faExclamationTriangle } from '@fortawesome/free-solid-svg
 
 class RowAlerts extends Component {
     render() {
-        let datosIncompletos = this.props.id > 2;
-        let facturaVencida = this.props.id > 4;
+        let datosIncompletos = this.props.id % 3 == 0;
+        let facturaVencida = this.props.id % 2 == 0;
 
         return (
             <span>

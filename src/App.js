@@ -18,15 +18,23 @@ class App extends Component {
         super(props);
         this.state = {
             openDetail: false,
-            rowDetail: null
+            rowDetail: null,
+            thisDate: new Date()
         };
     }
 
     handleRowClick = (row) => {
-        console.log(row.id);
+        //console.log(row.id);
         this.setState({
             openDetail: true,
             rowDetail: row
+        })
+    }
+
+    handleDateChange = (date) => {
+        this.setState({
+            openDetail: false,
+            thisDate: date
         })
     }
 
@@ -34,9 +42,9 @@ class App extends Component {
         return (
             <div className="App">
                 <NavigationBar/>
-                <Grid onRowClick={this.handleRowClick}/>
+                <Grid onRowClick={this.handleRowClick} thisDate={this.state.thisDate} />
                 <DetailDock openDock={this.state.openDetail} rowDetail={this.state.rowDetail} />
-                <FooterDock/>
+                <FooterDock thisDate={this.state.thisDate} onDateChange={this.handleDateChange} />
             </div>
         );
     }

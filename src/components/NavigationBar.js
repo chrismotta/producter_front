@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import logo from '../img/logo.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListAlt, faCubes, faPrint, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt, faCubes, faPrint, faUser, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 class NavigationBar extends Component {
     
@@ -21,7 +21,9 @@ class NavigationBar extends Component {
             }}>
                 <Navbar.Brand href="#home" style={{width:"70px"}}>
                 </Navbar.Brand>
-                <Nav className="mr-auto" activeKey="listado">
+                <Nav className="mr-auto" activeKey="calendario">
+                    <Nav.Link href="#calendario" eventKey="calendario">
+                        <FontAwesomeIcon icon={faCalendarAlt} /> Calendario</Nav.Link>
                     <Nav.Link href="#listado" eventKey="listado">
                         <FontAwesomeIcon icon={faListAlt} /> Listado</Nav.Link>
                     <Nav.Link href="#stock" eventKey="stock">

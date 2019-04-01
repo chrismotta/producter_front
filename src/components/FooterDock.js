@@ -4,14 +4,23 @@ import Nav from 'react-bootstrap/Nav';
 import DatePicker from "react-datepicker";
 import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
+import Moment from 'react-moment';
 
 class FooterDock extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            isVisibleFooter: false
+            isVisibleFooter: false,
+            thisDate: this.props.thisDate
         };
+    }
+
+    handleChange = (date) => {
+        this.setState({
+            thisDate: date
+        });
+        this.props.onDateChange(date);
     }
 
     render() {
@@ -26,7 +35,7 @@ class FooterDock extends Component {
                         >Cerrar</Button>
                         <DatePicker
                             inline
-                            selected={this.state.startDate}
+                            selected={this.state.thisDate}
                             onChange={this.handleChange}
                             locale={es}
                             fixedHeight
@@ -46,7 +55,11 @@ class FooterDock extends Component {
                             onClick={() => this.setState({ 
                                 isVisibleFooter: !this.state.isVisibleFooter 
                             })}
-                        >Calendario</Nav.Link>
+                            >
+                            <strong>Fecha: <Moment format="DD/MM/YYYY">
+                                {this.state.thisDate}
+                            </Moment></strong>
+                        </Nav.Link>
                     </Nav.Item>
                 </Nav>
             </div>

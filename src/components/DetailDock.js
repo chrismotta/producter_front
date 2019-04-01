@@ -1,4 +1,3 @@
-import es from 'date-fns/locale/es';
 import React, { Component } from 'react';
 import Nav from 'react-bootstrap/Nav';
 import DatePicker from "react-datepicker";
@@ -6,6 +5,7 @@ import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle, faPencilAlt, faTimes, faPenSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import OrdenDetail from './OrdenDetail';
 
 class DetailDock extends Component {
     
@@ -18,7 +18,7 @@ class DetailDock extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log(nextProps);
+        // console.log(nextProps);
         this.setState({
             isVisible: nextProps.openDock,
             rowDetail: nextProps.rowDetail
@@ -66,25 +66,4 @@ class DetailDock extends Component {
     }
 }
 
-class OrdenDetail extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            detail: this.props.detail
-        };
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            detail: nextProps.detail
-        })
-    }
-
-    render() {
-        return (
-            <div>Factura N. {this.state.detail.factura}</div>
-        );
-    }
-}
 export default DetailDock;
