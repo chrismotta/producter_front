@@ -174,6 +174,7 @@ class Grid extends Component {
             // onRowDoubleClick: (row) => {
             //     this.props.onRowClick(row);
             // }
+            noDataText: <h4>No hay órdenes para esta fecha. Seleccionar otra fecha en el calendario inferior.</h4> 
         };
 
         const selectRowProp = {
