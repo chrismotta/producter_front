@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown'
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
@@ -36,6 +37,16 @@ class NavigationBar extends Component {
                     <FormControl type="text" placeholder="Factura No." className="mr-sm-2" />
                     <Button variant="outline-info">Buscar</Button>
                 </Form>
+                <Nav className="mr-auto float-right" activeKey="calendario">
+                    <Dropdown as={Nav.Item}>
+                        <Dropdown.Toggle as={Nav.Link}>Garbini, Jazmin</Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item>Datos Personales</Dropdown.Item>
+                            <Dropdown.Item>Cambiar Contraseña</Dropdown.Item>
+                            <Dropdown.Item>Salir</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </Nav>
                 <span className="float-right text-info" style={{marginLeft:"20px"}}>
                     <FontAwesomeIcon icon={faUser} />
                     <span style={{marginLeft:"10px"}}>Garbini, Jazmin</span>
