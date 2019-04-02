@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import Spinner from 'react-bootstrap/Spinner';
 import ActionColumn from './ActionColumn';
 import RowAlerts from './RowAlerts';
 import moment from 'moment'
@@ -46,13 +47,26 @@ function rowAlerts(cell, row) {
     );
 }
 
+const loading = <div>
+    <Spinner animation="grow" variant="info" />
+    <Spinner animation="grow" variant="info" />
+    <Spinner animation="grow" variant="info" />
+</div>;
+const noData = <h4 className="text-secondary">
+    No hay órdenes para esta fecha. Seleccioná otra fecha en el calendario inferior.
+</h4>;
+const errorData = <h4 className="text-secondary">
+    Error al conectar con el servidor. Volvé a intentar más tarde.
+</h4>;
+
 class Grid extends Component {
 
     constructor(props) {
         super(props);
         this.state = { 
             products: [],
-            thisDate: this.props.thisDate 
+            thisDate: this.props.thisDate,
+            gridMsg: loading
         };
     }
 
@@ -128,41 +142,58 @@ class Grid extends Component {
         let date = moment(_date).format('DD/MM/YYYY');
         let limit = '20';
         let endpoint = 'http://jazmeendeco.com.ar.ci5.toservers.com/api/?date='+date+'&limit='+limit;
-        // let endpoint = 'http://localhost:3000/api/index.json';
 
         let _products = [];
         let i = 1;
+
+        this.setState({
+            products: [],
+            gridMsg: loading
+        });
         
         fetch(endpoint)
             .then(res => res.json())
             .then(results => {
-                results.map((item) => {
-                    _products.push({
-                        id: item.id,
-                        factura: item.NroBoleta,
-                        nombre: item.RazonSocial,
-                        estado: item.Estado,
-                        retiro: item.mentrega,
-                        pago: pagos[item.pago],
-                        comercial: comerciales[i % Object.keys(comerciales).length + 1],
-                        telefono: item.Telefono,
-                        email: item.EMAIL,
-                        tela: item.estructura_tipo ? item.estructura_tipo : "",
-                        fechaProveedor: item.estructura_FechaEnt,
-                        fechaFabrica: item.carpinteria_FechaEnt,
-                        caracteristicas: item.Caracteristicas ? item.Caracteristicas : "",
-                        comentarios: item.Comentario ? item.Comentario : "",
-                        // datos: "\n15511833490\nnatalia.barberis@hotmail.com\nDomicilio:\nruta 3 km 56500",
-                        // expreso: expresos[i % Object.keys(expresos).length + 1],
-                        // expresoComentario: "Buenos Aires Av Richeri y Boulongne sur Mer. Mercado central Nave D3 1144806666 Lunes a viernes de 8:00 a 17:00 Revello María Fernanda DNI 26392567 Tel 1134763801 Dirección Almirante Espora 236 Huerta Grande Cordoba CP 5174"
+                if(results.length > 0){
+                    results.map((item) => {
+                        _products.push({
+                            id: item.id,
+                            factura: item.NroBoleta,
+                            nombre: item.RazonSocial,
+                            estado: item.Estado,
+                            retiro: item.mentrega,
+                            pago: pagos[item.pago],
+                            comercial: comerciales[i % Object.keys(comerciales).length + 1],
+                            telefono: item.Telefono,
+                            email: item.EMAIL,
+                            tela: item.estructura_tipo ? item.estructura_tipo : "",
+                            fechaProveedor: item.estructura_FechaEnt,
+                            fechaFabrica: item.carpinteria_FechaEnt,
+                            caracteristicas: item.Caracteristicas ? item.Caracteristicas : "",
+                            comentarios: item.Comentario ? item.Comentario : "",
+                            // datos: "\n15511833490\nnatalia.barberis@hotmail.com\nDomicilio:\nruta 3 km 56500",
+                            // expreso: expresos[i % Object.keys(expresos).length + 1],
+                            // expresoComentario: "Buenos Aires Av Richeri y Boulongne sur Mer. Mercado central Nave D3 1144806666 Lunes a viernes de 8:00 a 17:00 Revello María Fernanda DNI 26392567 Tel 1134763801 Dirección Almirante Espora 236 Huerta Grande Cordoba CP 5174"
+                        });
+                        i++;
                     });
-                    i++;
-                });
+                    
+                    this.setState({
+                        products: _products
+                    });
+                } else {
+                    this.setState({
+                        products: [],
+                        gridMsg: noData
+                    });
+                }
+            })
+            .catch(error => {
                 this.setState({
-                    products: _products
+                    products: [],
+                    gridMsg: errorData
                 });
-            }
-        );
+            });
         
     }
 
@@ -174,7 +205,7 @@ class Grid extends Component {
             // onRowDoubleClick: (row) => {
             //     this.props.onRowClick(row);
             // }
-            noDataText: <h4>No hay órdenes para esta fecha. Seleccionar otra fecha en el calendario inferior.</h4> 
+            noDataText: <div style={{padding:"30px 0px"}}>{this.state.gridMsg}</div> 
         };
 
         const selectRowProp = {

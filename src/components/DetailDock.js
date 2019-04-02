@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle, faPencilAlt, faTimes, faPenSquare, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faPenSquare, faWindowClose, faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
 import OrdenDetail from './OrdenDetail';
 
 class DetailDock extends Component {
@@ -34,26 +34,28 @@ class DetailDock extends Component {
                 size={500} 
                 isVisible={this.state.isVisible}>
                 <div>
-                    <div style={{padding:'10px 10px 0px 10px'}} className="text-left">
-                        <FontAwesomeIcon 
+                    <div className="text-left p-2">
+                        <Button 
                             onClick={() => this.setState({ isVisible: !this.state.isVisible })}
-                            icon={faWindowClose} 
-                            className="icon-right-margin text-danger"
-                            style={{cursor:"pointer"}} 
-                            size="lg"
-                            />
+                            variant="outline-danger" 
+                            size="sm" 
+                            className="icon-right-margin"
+                            >
+                            <FontAwesomeIcon icon={faTimes} size="lg" />
+                        </Button>
                         {
                             this.state.rowDetail ?
-                            <FontAwesomeIcon 
-                                icon={faPenSquare} 
-                                className="text-info" 
-                                style={{cursor:"pointer"}} 
-                                size="lg"
-                                /> :
+                            <Button 
+                                variant="outline-info" 
+                                size="sm" 
+                                >
+                                <FontAwesomeIcon icon={faPen} />
+                            </Button> 
+                            :
                             null
                         }
                     </div>
-                    <div style={{padding:'10px 30px 20px 20px'}} className="text-left">
+                    <div className="text-left p-3">
                         {
                             this.state.rowDetail ?
                             <OrdenDetail detail={this.state.rowDetail} ></OrdenDetail> :
