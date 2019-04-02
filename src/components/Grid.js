@@ -94,10 +94,12 @@ class Grid extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps.thisDate);
-        this.setState({
-            thisDate: nextProps.thisDate
-        });
-        this.fetchData(nextProps.thisDate);
+        if(nextProps.thisDate != this.state.thisDate){
+            this.setState({
+                thisDate: nextProps.thisDate
+            });
+            this.fetchData(nextProps.thisDate);
+        }
     }
 
     componentDidMount() {
