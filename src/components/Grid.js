@@ -4,6 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import ActionColumn from './ActionColumn';
 import RowAlerts from './RowAlerts';
 import moment from 'moment'
+import DatePicker from "react-datepicker";
 
 const estados = {
     '1': 'En Stock',
@@ -217,6 +218,22 @@ class Grid extends Component {
             clickToSelect: true
         };
 
+        function getDateFilter() {
+            return (
+                <DatePicker
+                    className="form-control form-control-sm"
+                    />
+            );
+        }
+
+        function getTextFilter() {
+            return (
+                <input
+                    className="form-control form-control-sm"
+                    />
+            );
+        }
+          
         return (
             <div style={{ padding: "10px" }}>
                 <BootstrapTable
@@ -232,19 +249,66 @@ class Grid extends Component {
                 // search={ true } 
                 >
                     <TableHeaderColumn dataField='info' width='70' dataFormat={rowAlerts}></TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} width='80' tdStyle={this.textCellCollapsed} dataField='factura' isKey={true}>Fact.</TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} width='200' tdStyle={this.textCellCollapsed} dataField='nombre'>Nombre</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        width='80' 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='factura' 
+                        isKey={true}
+                        filter={{type: 'TextFilter'}}
+                        >Fact.</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        width='200' 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='nombre'
+                        filter={{type: 'TextFilter'}}
+                        >Nombre</TableHeaderColumn>
                     {/* <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='tela'>Tela</TableHeaderColumn> */}
                     {/* <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='color'>Color</TableHeaderColumn> */}
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='fechaProveedor'>Proveedor</TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='fechaFabrica'>Fabrica</TableHeaderColumn>
                     {/* <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='caracteristicas'>Caracteristocas</TableHeaderColumn> */}
                     {/* <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='comentarios'>Comentarios</TableHeaderColumn> */}
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='estado'>Estado</TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='retiro'>Retiro</TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='pago'>Pago</TableHeaderColumn>
-                    <TableHeaderColumn dataSort={true} tdStyle={this.textCellCollapsed} dataField='comercial'>Comercial</TableHeaderColumn>
-                    <TableHeaderColumn dataField='action' width='127' dataFormat={this.actionColumn}></TableHeaderColumn>
+                    <TableHeaderColumn
+                        dataSort={true}
+                        tdStyle={this.textCellCollapsed}
+                        dataField='fechaProveedor'
+                        filter={{type: 'TextFilter'}}
+                        >Proveedor</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='fechaFabrica'
+                        filter={{type: 'TextFilter'}}
+                        >Fábrica</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='estado'
+                        filter={{type: 'SelectFilter', options: estados}}
+                        >Estado</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='retiro'
+                        filter={{type: 'SelectFilter', options: retiros}}
+                        >Retiro</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='pago'
+                        filter={{type: 'SelectFilter', options: pagos}}
+                        >Pago</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataSort={true} 
+                        tdStyle={this.textCellCollapsed} 
+                        dataField='comercial'
+                        filter={{type: 'SelectFilter', options: comerciales}}
+                        >Comercial</TableHeaderColumn>
+                    <TableHeaderColumn 
+                        dataField='action' 
+                        width='127' 
+                        dataFormat={this.actionColumn}
+                        ></TableHeaderColumn>
                 </BootstrapTable>
             </div>
         );

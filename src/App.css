@@ -57,3 +57,6 @@
 .text-disabled {
   color: #DDD;
 }
+body {
+  overflow-y: scroll;
+}

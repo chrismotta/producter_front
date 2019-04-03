@@ -14,16 +14,17 @@ class NavigationBar extends Component {
     
     render() {
         return (
-            <Navbar bg="dark" variant="dark" sticky="top" 
-                className="justify-content-between"
-                style={{
+            <Navbar bg="dark" variant="dark" sticky="top" className="justify-content-between">
+                <Navbar.Brand href="#home" className="bg-dark" style={{
+                    margin: "-5px 10px -5px -20px",
+                    width: "95px",
+                    height: "50px",
                     backgroundImage: `url(${logo})`,
                     backgroundBlendMode: 'lighten',
                     backgroundSize: "85px",
-                    backgroundPosition: "10px 3px",
+                    backgroundPosition: "10px 0px",
                     backgroundRepeat: "no-repeat"
                 }}>
-                <Navbar.Brand href="#home" style={{width:"70px"}}>
                 </Navbar.Brand>
                 <Nav className="mr-auto" activeKey="calendario">
                     <Nav.Link href="#calendario" eventKey="calendario">
