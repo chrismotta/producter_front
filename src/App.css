@@ -60,3 +60,9 @@
 body {
   overflow-y: scroll;
 }
+
+.login {
+  display: flex;
+  height: 100vh;
+  text-align: left;
+}

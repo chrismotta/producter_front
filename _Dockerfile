@@ -1,0 +1,13 @@
+FROM node
+
+COPY ["package.json", "package-lock.json", "/user/src/"]
+
+WORKDIR /user/src
+
+RUN npm install
+
+COPY [".", "/user/src/"]
+
+EXPOSE 3000
+
+CMD ["npm", "start"]

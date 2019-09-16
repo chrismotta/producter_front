@@ -3,12 +3,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
-import Image from 'react-bootstrap/Image';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import logo from '../img/logo.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faListAlt, faCubes, faPrint, faUser, faCalendarAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom'
 
 class NavigationBar extends Component {
     
@@ -55,7 +55,7 @@ class NavigationBar extends Component {
                             <Dropdown.Item>Datos Personales</Dropdown.Item>
                             <Dropdown.Item>Cambiar Contraseña</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item>Salir</Dropdown.Item>
+                            <Dropdown.Header className="dropdown-item"><Link to="/logout">Salir</Link></Dropdown.Header>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Nav>
