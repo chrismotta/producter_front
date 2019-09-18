@@ -1,12 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faListAlt, faCubes, faPrint, faScrewdriver, faTrashAlt, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 import NavigationBar from '../components/NavigationBar';
 import FooterDock from '../components/FooterDock';
 import DetailDock from '../components/DetailDock';
-
-library.add( faListAlt, faCubes, faPrint, faScrewdriver, faTrashAlt, faPaperclip );
 
 class UserMain extends Component {
 
@@ -15,7 +11,7 @@ class UserMain extends Component {
         this.state = {
             openDetail: false,
             rowDetail: null,
-            thisDate: new Date()
+            // thisDate: props.thisDate
         };
     }
 
@@ -28,10 +24,12 @@ class UserMain extends Component {
     }
 
     handleDateChange = (date) => {
-        this.setState({
-            openDetail: false,
-            thisDate: date
-        })
+        // this.setState({
+        //     openDetail: false,
+        //     thisDate: date
+        // })
+        this.props.onDateChange(date);
+
     }
 
     render() {
@@ -40,7 +38,7 @@ class UserMain extends Component {
                 <NavigationBar/>
                 {this.props.children}
                 <DetailDock openDock={this.state.openDetail} rowDetail={this.state.rowDetail} />
-                <FooterDock thisDate={this.state.thisDate} onDateChange={this.handleDateChange} />
+                <FooterDock dateString={this.props.dateString} onDateChange={this.handleDateChange} />
             </Fragment>
         );
     }

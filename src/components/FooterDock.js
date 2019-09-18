@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
 import Moment from 'react-moment';
+// import moment from 'moment'
 
 class FooterDock extends Component {
     
@@ -12,15 +13,19 @@ class FooterDock extends Component {
         super(props);
         this.state = {
             isVisibleFooter: false,
-            thisDate: this.props.thisDate
+            // thisDate: this.props.dateString
         };
     }
 
     handleChange = (date) => {
-        this.setState({
-            thisDate: date
-        });
+        // this.setState({
+        //     thisDate: date
+        // });
+        // let newDate = date
         this.props.onDateChange(date);
+
+        // console.log(moment(date).format("YYYY-MM-DD"))
+        // this.props.history.push(`/login/`)
     }
 
     render() {
@@ -40,7 +45,7 @@ class FooterDock extends Component {
                         >Cerrar</Button>
                         <DatePicker
                             inline
-                            selected={this.state.thisDate}
+                            selected={new Date(`${this.props.dateString} 00:00:00`)}
                             onChange={this.handleChange}
                             locale={es}
                             fixedHeight
@@ -62,7 +67,7 @@ class FooterDock extends Component {
                             })}
                             >
                             <strong>Fecha: <Moment format="DD/MM/YYYY">
-                                {this.state.thisDate}
+                                {this.props.dateString}
                             </Moment></strong>
                         </Nav.Link>
                     </Nav.Item>

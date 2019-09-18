@@ -50,11 +50,10 @@ class Login extends Component {
         })
         .then(res => {
             this.setResponseText('Ok!')
-            Cookie.set("auth-token", res.token);
+            Cookie.set("auth-token", res.data.access_token);
             this.props.history.push('/calendar');
         })
         .catch(error => {
-            // console.log('Error on Authentication');
             this.setResponseText('Usuario o contraseña incorrectos')
         });
     }
@@ -66,7 +65,7 @@ class Login extends Component {
                     <Card.Img variant="top" src={logo} style={{ mixBlendMode: 'screen' }} />
                     <Card.Body>
                         <Form onSubmit={this.handleOnSubmit}>
-                            <Form.Group controlId="formBasicEmail">
+                            <Form.Group>
                                 <Form.Label>Usuario</Form.Label>
                                 <Form.Control 
                                     type="text" 
@@ -74,9 +73,10 @@ class Login extends Component {
                                     value={this.state.userData.username} 
                                     onChange={this.handleOnChange}
                                     name="username"
+                                    autoComplete="username"
                                     />
                             </Form.Group>
-                            <Form.Group controlId="formBasicPassword">
+                            <Form.Group>
                                 <Form.Label>Contraseña</Form.Label>
                                 <Form.Control 
                                     type="password" 
@@ -84,6 +84,7 @@ class Login extends Component {
                                     value={this.state.userData.password} 
                                     onChange={this.handleOnChange}
                                     name="password"
+                                    autoComplete="current-password"
                                     />
                             </Form.Group>
                             <Button variant="info" type="submit" style={{width: "100%"}}>

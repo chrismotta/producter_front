@@ -1,0 +1,155 @@
+@import "../../style/palette.module.scss";
+$scrollSize: 6px;
+
+.calendarcard__container {
+    margin: 10px;
+    padding: 5px;
+    background: $color1;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+
+    display: grid;
+    grid-template-columns: 200px 1.5fr 1fr 1fr 230px;
+    grid-template-rows: auto 150px;
+    gap: 7px 5px;
+
+    &:hover {
+        background: $color1__hover;    
+    }
+
+    & > div {
+        padding: 0 10px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+
+    & > .title {
+        color: $color__darker;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-size: 10px;
+        padding: 3px 0px 1px 3px;
+        border-bottom: 1px dotted $color__darker;
+
+        & .plusIcon {
+            margin-right: 3px;
+            font-size: 12px;
+            float: right;
+            cursor: pointer;
+
+            &:hover {
+                color: black;
+            }
+        }
+    }
+
+    & > .data {
+        
+        & > .dataContainer {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 4px;
+
+            scrollbar-color: $color3 transparent;
+            scrollbar-width: thin;
+            
+            &::-webkit-scrollbar {
+                width: 100%;            
+                height: $scrollSize;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $color3;
+            }
+
+            & > p {
+                margin: 0 5px 0 0;
+                white-space: nowrap;
+            }
+            
+            & > p.name {
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            & .dataIcon {
+                width: 20px;
+                margin-right: 5px;
+            }
+        }
+
+        & > .title {
+            color: $color__darker;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 10px;
+            padding: 7px 0px 0px 0px;
+            border-bottom: 1px dotted $color__darker;
+        }
+
+        & > .actions {
+            padding-top: 5px;
+            display: flex;
+            justify-content: space-between;
+
+            & > button {
+                font-size: 15px;
+                padding: 0.2em 0.5em;
+            }
+        }
+    }
+
+    & > .order {
+
+        & > p {
+            margin: 0 5px 0 0;
+            white-space: nowrap;
+        }
+        
+        & .dataIcon {
+            width: 20px;
+            margin-right: 5px;
+        }
+
+        & .statusRow {
+            font-weight: bold;
+            line-height: 12px;
+            color: $color__darker2;
+            margin-top: 8px;
+            white-space: normal;
+
+            & > .statusIcon {
+                font-size: 24px;
+                margin: 0px 7px 1px 0;
+            }
+
+            & > .statusText {
+                display: inline-block;
+                max-width: 45px;
+                font-size: 10px;
+            }
+
+        }
+    }
+
+    & > .text {
+        padding: 10px;
+        font-size: 12px;
+        background: $color__lighter;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border-radius: 4px 0px 0px 4px;
+
+        scrollbar-color: $color3 transparent;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: $scrollSize;
+            height: 100%;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $color3;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+@import "../../style/palette.module.scss";
+
+.quote__container {
+
+    & > .text {
+        font-size: 12px;
+        height: 100%;
+        width: 300px;
+        background: white;
+        overflow-y: scroll;
+    }
+
+    & > hr {
+        margin: 10px auto 2px auto;
+    }
+
+    & > .quote {
+        text-align: right;
+        color: grey;
+    }
+    
+}

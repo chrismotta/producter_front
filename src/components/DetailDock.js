@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import DatePicker from "react-datepicker";
+// import Nav from 'react-bootstrap/Nav';
+// import DatePicker from "react-datepicker";
 import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenSquare, faWindowClose, faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPen } from '@fortawesome/free-solid-svg-icons';
 import OrdenDetail from './OrdenDetail';
 
 class DetailDock extends Component {
