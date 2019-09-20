@@ -38,7 +38,7 @@ class Login extends Component {
 
     handleOnSubmit = event => {
         event.preventDefault();
-        const authEndpoint = 'http://localhost:8000/api/auth/token';
+        const authEndpoint = `${process.env.REACT_APP_API_ENDPOINT}auth/token`;
         const {username, password} = this.state.userData;
         this.setResponseText('Conectando...')
 
@@ -51,6 +51,8 @@ class Login extends Component {
         .then(res => {
             this.setResponseText('Ok!')
             Cookie.set("auth-token", res.data.access_token);
+            Cookie.set("user-name", username);
+            // Cookie.set("user-role", username);
             this.props.history.push('/calendar');
         })
         .catch(error => {

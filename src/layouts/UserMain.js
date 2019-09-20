@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-
 import NavigationBar from '../components/NavigationBar';
 import FooterDock from '../components/FooterDock';
 import DetailDock from '../components/DetailDock';
+import FiltersDock from '../components/FiltersDock';
 
 class UserMain extends Component {
 
@@ -10,35 +10,56 @@ class UserMain extends Component {
         super(props);
         this.state = {
             openDetail: false,
+            openFilters: false,
             rowDetail: null,
             // thisDate: props.thisDate
         };
     }
 
-    handleRowClick = (row) => {
-        //console.log(row.id);
+    handleOpenDetail = (open = true, row = null) => {
         this.setState({
-            openDetail: true,
-            rowDetail: row
+            openFilters: false,
+            openDetail: open,
+            // rowDetail: row
         })
     }
 
-    handleDateChange = (date) => {
-        // this.setState({
-        //     openDetail: false,
-        //     thisDate: date
-        // })
-        this.props.onDateChange(date);
+    handleOpenFilters = (open = true) => {
+        this.setState({
+            openDetail: false,
+            openFilters: open,
+        })
+        // this.props.handleOpenFilters(open)
+    }
 
+    handleDateChange = (date) => {
+        this.setState({
+            openDetail: false,
+        })
+        this.props.onDateChange(date);
     }
 
     render() {
         return (
             <Fragment>
-                <NavigationBar/>
+                <NavigationBar 
+                    handleOpenDetail = {this.handleOpenDetail} 
+                    handleOpenFilters = {this.handleOpenFilters} 
+                />
                 {this.props.children}
-                <DetailDock openDock={this.state.openDetail} rowDetail={this.state.rowDetail} />
-                <FooterDock dateString={this.props.dateString} onDateChange={this.handleDateChange} />
+                <DetailDock
+                    handleOpen = {this.handleOpenDetail} 
+                    openDock = {this.state.openDetail}
+                    rowDetail = {this.state.rowDetail}
+                />
+                <FiltersDock
+                    handleOpen={this.handleOpenFilters}
+                    openDock={this.state.openFilters}
+                />
+                <FooterDock
+                    dateString = {this.props.dateString}
+                    onDateChange = {this.handleDateChange}
+                />
             </Fragment>
         );
     }

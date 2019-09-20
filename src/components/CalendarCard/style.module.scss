@@ -7,12 +7,12 @@ $scrollSize: 6px;
     background: $color1;
     border-radius: 10px;
     text-align: left;
-    box-shadow: -1px 1px 3px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px 1px 3px 0px $color__darker;
     transition: 0.3s;
 
     display: grid;
-    grid-template-columns: 200px 1.5fr 1fr 1fr 230px;
-    grid-template-rows: auto 150px;
+    grid-template-columns: 180px 1.5fr 1fr 1fr 230px;
+    grid-template-rows: auto 160px;
     gap: 7px 5px;
 
     &:hover {
@@ -37,18 +37,13 @@ $scrollSize: 6px;
             margin-right: 3px;
             font-size: 12px;
             float: right;
-            cursor: pointer;
-
-            &:hover {
-                color: black;
-            }
         }
     }
 
     & > .data {
         
         & > .dataContainer {
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             padding-bottom: 4px;
 
@@ -116,7 +111,7 @@ $scrollSize: 6px;
             font-weight: bold;
             line-height: 12px;
             color: $color__darker2;
-            margin-top: 8px;
+            margin-top: 5px;
             white-space: normal;
 
             & > .statusIcon {
@@ -133,23 +128,4 @@ $scrollSize: 6px;
         }
     }
 
-    & > .text {
-        padding: 10px;
-        font-size: 12px;
-        background: $color__lighter;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        border-radius: 4px 0px 0px 4px;
-
-        scrollbar-color: $color3 transparent;
-        scrollbar-width: thin;
-
-        &::-webkit-scrollbar {
-            width: $scrollSize;
-            height: 100%;
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: $color3;
-        }
-    }
 }

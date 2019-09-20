@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DatePicker from "react-datepicker";
+import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 
 class DetailSection extends Component {
@@ -17,11 +18,24 @@ class DetailSection extends Component {
     }
 }
 class OrdenDetail extends Component {
+    
+    newDetail = {
+        extId: "",
+        longName: "",
+        phone: "",
+        email: "",
+        address: "",
+        caracteristics: "",
+        comments: "",
+        fabric: "",
+    }
 
     constructor(props) {
         super(props);
+    
+
         this.state = {
-            detail: this.props.detail
+            detail: this.newDetail
         };
     }
 
@@ -36,22 +50,28 @@ class OrdenDetail extends Component {
     }
 
     render() {
-        const { detail } = this.state;
+        const detail = this.newDetail;
         return (
             <div>
-                <h4>Factura N. {this.state.detail.factura}</h4>
+                {/* <h4>Factura N. {detail.extId}</h4> */}
                 <Form>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Caracteristicas</Form.Label>
-                        <Form.Control size="sm" as="textarea" rows="5" value={detail.caracteristicas} />
+                        <Form.Control size="sm" as="textarea" rows="5" 
+                            //value={detail.caracteristics} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Comentarios</Form.Label>
-                        <Form.Control size="sm" as="textarea" rows="5" value={detail.comentarios} />
+                        <Form.Control size="sm" as="textarea" rows="5" 
+                            //value={detail.comments} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Tela</Form.Label>
-                        <Form.Control size="sm" as="textarea" rows="5" value={detail.tela} />
+                        <Form.Control size="sm" as="textarea" rows="5" 
+                            //value={detail.fabric} 
+                        />
                     </Form.Group>
 
                     <DetailSection>DATOS DEL PEDIDO</DetailSection>
@@ -70,7 +90,7 @@ class OrdenDetail extends Component {
                                 <option value="produccion">En Producción</option>
                                 <option value="reclamo">Reclamo</option>
                                 <option value="atrazado">Atrazado</option>
-                                <option value="entregado" selected="selected">Entregado</option>
+                                <option value="entregado">Entregado</option>
                                 <option value="pendiente">Pendiente</option>
                                 <option value="incompleto">Incompleto</option>
                                 <option value="tlistaflustrem">T.L. Falta Mesa</option>
@@ -99,7 +119,7 @@ class OrdenDetail extends Component {
                                 <option value="llevascargo">Lleva Sin Cargo</option>
                                 <option value="fleteExp">Flete a Expreso</option>
                                 <option value="retiraExp">Retira Expreso de Fábrica</option>
-                                <option value="fleConf" selected="selected">LLEVA FLETE CONFIRMADO</option>
+                                <option value="fleConf">LLEVA FLETE CONFIRMADO</option>
                                 <option value="expConf">EXPRESO CONTRATADO</option>
                                 <option value="sinCoord">Sin coordiar - NO HACER</option>
                                 <option value="tudestino">Flete Tu Destino</option>
@@ -111,8 +131,8 @@ class OrdenDetail extends Component {
                         <Col sm="8">
                             <DatePicker
                                 className="form-control form-control-sm"
-                                selected={this.state.startDate}
-                                onChange={this.handleChange}
+                                // selected={this.state.startDate}
+                                // onChange={this.handleChange}
                             />
                         </Col>
                     </Form.Group>
@@ -121,8 +141,8 @@ class OrdenDetail extends Component {
                         <Col sm="8">
                             <DatePicker
                                 className="form-control form-control-sm"
-                                selected={this.state.startDate}
-                                onChange={this.handleChange}
+                                // selected={this.state.startDate}
+                                // onChange={this.handleChange}
                             />
                         </Col>
                     </Form.Group>
@@ -131,19 +151,27 @@ class OrdenDetail extends Component {
                     
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control size="sm" type="text" placeholder="" value={detail.nombre} />
+                        <Form.Control size="sm" type="text" placeholder="" 
+                            //value={detail.longName} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Teléfono</Form.Label>
-                        <Form.Control size="sm" type="text" placeholder="" value={detail.nombre} />
+                        <Form.Control size="sm" type="text" placeholder="" 
+                            //value={detail.phone} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control size="sm" type="email" placeholder="" value={detail.email} />
+                        <Form.Control size="sm" type="email" placeholder="" 
+                            //value={detail.email} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Domicilio</Form.Label>
-                        <Form.Control size="sm" type="text" placeholder="" value={detail.nombre} />
+                        <Form.Control size="sm" type="text" placeholder="" 
+                            //value={detail.address} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="formBasicChecbox">
                         <Form.Check type="checkbox" label="Datos incompletos" />
@@ -154,11 +182,20 @@ class OrdenDetail extends Component {
 
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Datos del expreso</Form.Label>
-                        <Form.Control size="sm" as="textarea" rows="5" value={detail.expreso} />
+                        <Form.Control size="sm" as="textarea" rows="5" 
+                            //value={detail.address} 
+                        />
                     </Form.Group>
                     <Form.Group controlId="formBasicChecbox">
                         <Form.Check type="checkbox" label="Datos incompletos" />
                     </Form.Group>
+
+                    <div>
+                        <Button 
+                            variant="outline-success" 
+                            block
+                        >Guardar Orden</Button>
+                    </div>
 
                 </Form>
             </div>

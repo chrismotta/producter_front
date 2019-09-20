@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
+import 'moment/locale/es'
 import style from './style.module.scss'
-import Quote from '../Quote'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faPhone, 
@@ -20,8 +20,17 @@ import {
     faPaperclip,
     faPrint
 } from '@fortawesome/free-solid-svg-icons'
+import EditableText from '../EditableText'
+moment.locale('es')
 
 function calendarCard({data}){
+
+    const paymentList = [
+        "Pagó todo",
+        "Reforzar seña",
+        "No pagó nada"
+    ]
+
     return (
         <div className={style.calendarcard__container}>
             
@@ -58,6 +67,10 @@ function calendarCard({data}){
                     <strong>Status: </strong>{data.status}
                 </p>
                 <p>
+                    <FontAwesomeIcon icon={faCheckSquare} className={style.dataIcon} />
+                    <strong>Pago: </strong>{paymentList[data.paymentType]}
+                </p>
+                <p>
                     <FontAwesomeIcon icon={faTruck} className={style.dataIcon} />
                     <strong>Retiro: </strong>{data.deliveryType}
                 </p>
@@ -69,24 +82,9 @@ function calendarCard({data}){
                 </p>
             </div>
 
-            <div className={style.text}>
-                {data.caracteristics.map((item, index) => (
-                    <Quote text={item} user={"Admin"} date={"Hace 4 dias"} key={index}/>
-                ))}
-            </div>
-
-            <div className={style.text}>
-                {[data.fabric].map((item, index) => (
-                    <Quote text={item} user={"Admin"} date={"Hace 4 dias"} key={index}/>
-                ))}
-            </div>
-
-            <div className={style.text}>
-                {data.comments.map((item, index) => (
-                    <Quote text={item} user={"Admin"} date={"Hace 4 dias"} key={index}/>
-                ))}
-            </div>
-
+            <EditableText data={data.caracteristics} />
+            <EditableText data={data.fabric} />
+            <EditableText data={data.comments} />
             <div className={style.data}>
                 <div className={style.dataContainer}>
                     <p className={style.name}>{data.longName}</p>
@@ -105,7 +103,7 @@ function calendarCard({data}){
                 </div>
 
                 <div className={style.title}>
-                    ACTIONS
+                    ACCIONES
                 </div>
 
                 <div className={style.actions}>
@@ -115,17 +113,17 @@ function calendarCard({data}){
                     <button className="btn btn-outline-info" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPrint} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
-                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
-                    </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
-                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
-                    </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
-                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
-                    </button>
                     <button className="btn btn-outline-danger" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faTrash} className={style.actionIcon} />
+                    </button>
+                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
+                    </button>
+                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
+                    </button>
+                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                        <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
                     </button>
 
                 </div>

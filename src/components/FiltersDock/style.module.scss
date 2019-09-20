@@ -1,0 +1,15 @@
+@import "../../style/palette.module.scss";
+.filtersContainer {
+    background: $color__seccondaryBack;
+    
+    & > .closeButton {
+        float: right;
+        margin: 10px;
+    }
+
+    & .filterGroup {
+        margin-bottom: 20px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+}

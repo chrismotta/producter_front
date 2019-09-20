@@ -37,7 +37,7 @@ class FooterDock extends Component {
                     size={305} 
                     isVisible={this.state.isVisibleFooter}
                     >
-                    <div className="pt-3 pb-1 px-3">
+                    <div className="pt-3 pb-1 px-3 text-center">
                         <Button 
                             variant="outline-info" 
                             className="float-right"

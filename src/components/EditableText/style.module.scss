@@ -1,0 +1,84 @@
+@import "../../style/palette.module.scss";
+$scrollSize: 6px;
+.textContainer {
+    margin: 0;
+    padding: 0 !important;
+    position: relative;
+
+    & > .text {
+        height: 100%;
+        padding: 10px;
+        font-size: 12px;
+        background: $color__lighter;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        border-radius: 4px 0px 0px 4px;
+
+        scrollbar-color: $color3 transparent;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: $scrollSize;
+            height: 100%;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: $color3;
+        }
+
+        & > .addInput {
+            margin-bottom: 15px;
+            animation: fadein 0.5s;
+
+            & textarea {
+                resize: none;
+                font-size: 12px;
+                
+                scrollbar-color: $color3 transparent;
+                scrollbar-width: thin;
+
+                &::-webkit-scrollbar {
+                    width: $scrollSize;
+                    height: 100%;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background-color: $color3;
+                }
+            }
+
+            & button {
+                transition: 0.3s;
+                padding-right: 8px;
+                font-size: 16px;
+            }
+
+            & .submitButton {
+                color: #090;
+                &:hover {
+                    color: #060;
+                }
+            }
+            & .cancelButton {
+                color: #999;
+                &:hover {
+                    color: #666;
+                }
+            }
+        }
+
+        & > .quoteContainer {
+            transition: 1s;
+        }
+    }
+
+    & > .addButton {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        animation: fadein 0.5s;
+    }
+
+    @keyframes fadein {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+}
