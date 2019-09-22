@@ -8,8 +8,6 @@ import CalendarCard from "../CalendarCard";
 import NoResults from "../NoResults";
 import Loading from "../Loading";
 
-
-
 class Calendar extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +25,8 @@ class Calendar extends Component {
         };
     }
 
-    getData = () => {
+    getData = (filters = null) => {
+        console.log(`Filters: ${filters}`)
         const endpoint = `${process.env.REACT_APP_API_ENDPOINT}orders?date=${this.state.dateString}`;
         const bearer = Cookie.get("auth-token");
         fetch(endpoint, {
@@ -106,7 +105,8 @@ class Calendar extends Component {
                 openDetail={this.state.openDetail}
                 dateString={this.state.dateString}
                 onDateChange={this.handleDateChange}
-                handleOpenFilters = {this.handleOpenFilters}                 
+                handleOpenFilters = {this.handleOpenFilters}
+                handleGetData = {this.getData}
             >
                 {this.renderCalendar()}
             </UserMain>

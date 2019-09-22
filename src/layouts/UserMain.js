@@ -55,6 +55,7 @@ class UserMain extends Component {
                 <FiltersDock
                     handleOpen={this.handleOpenFilters}
                     openDock={this.state.openFilters}
+                    handleGetData = {this.props.handleGetData}
                 />
                 <FooterDock
                     dateString = {this.props.dateString}
