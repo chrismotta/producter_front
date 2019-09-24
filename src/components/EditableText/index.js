@@ -6,6 +6,7 @@ import Quote from "../Quote";
 import style from "./style.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
+import Skeleton from "../SkeletonText/Skeleton";
 
 export default function({ data }) {
     const [showAddButton, setShowAddButton] = useState(false)
@@ -23,7 +24,7 @@ export default function({ data }) {
                 setShowAddButton(false)
             }}
         >
-            {showAddButton && (
+            {(showAddButton && quotesList) && (
                 <button
                     className={`btn btn-info ${style.addButton}`}
                     onClick={() => {
@@ -84,16 +85,28 @@ export default function({ data }) {
                 )}
             
                 <div className={style.quoteContainer}>
-                    {quotesList.map((item, index) => (
-                        <Quote
-                            text={item.text}
-                            user={item.user}
-                            date={moment(item.date)
-                                .locale("es")
-                                .fromNow()}
-                            key={index}
-                        />
-                    ))}
+                    {
+                        quotesList ?
+                        quotesList.map((item, index) => (
+                            <Quote
+                                text={item.text}
+                                user={item.user}
+                                date={moment(item.date)
+                                    .locale("es")
+                                    .fromNow()}
+                                key={index}
+                            />
+                        ))
+                        :
+                        <>
+                            <Skeleton height="16px" width="100%"/>
+                            <Skeleton height="16px" width="90%"/>
+                            <Skeleton height="16px" width="60%"/>
+                            <Skeleton height="16px" width="100%"/>
+                            <Skeleton height="16px" width="90%"/>
+                            <Skeleton height="16px" width="60%"/>
+                        </>
+                    }
                 </div>
             </div>
         </div>

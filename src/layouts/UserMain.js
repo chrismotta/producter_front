@@ -12,7 +12,6 @@ class UserMain extends Component {
             openDetail: false,
             openFilters: false,
             rowDetail: null,
-            // thisDate: props.thisDate
         };
     }
 
@@ -57,10 +56,13 @@ class UserMain extends Component {
                     openDock={this.state.openFilters}
                     handleGetData = {this.props.handleGetData}
                 />
-                <FooterDock
-                    dateString = {this.props.dateString}
-                    onDateChange = {this.handleDateChange}
-                />
+                {
+                    this.props.dateString &&
+                    <FooterDock
+                        dateString = {this.props.dateString}
+                        onDateChange = {this.handleDateChange}
+                        />
+                }
             </Fragment>
         );
     }

@@ -1,11 +1,10 @@
-import es from 'date-fns/locale/es';
 import React, { Component } from 'react';
+import es from 'date-fns/locale/es';
 import Nav from 'react-bootstrap/Nav';
 import DatePicker from "react-datepicker";
 import Dock from 'react-dock';
 import Button from 'react-bootstrap/Button';
 import Moment from 'react-moment';
-// import moment from 'moment'
 
 class FooterDock extends Component {
     
@@ -13,19 +12,11 @@ class FooterDock extends Component {
         super(props);
         this.state = {
             isVisibleFooter: false,
-            // thisDate: this.props.dateString
         };
     }
 
     handleChange = (date) => {
-        // this.setState({
-        //     thisDate: date
-        // });
-        // let newDate = date
         this.props.onDateChange(date);
-
-        // console.log(moment(date).format("YYYY-MM-DD"))
-        // this.props.history.push(`/login/`)
     }
 
     render() {
@@ -76,5 +67,5 @@ class FooterDock extends Component {
         );
     }
 }
-  
+
 export default FooterDock;

@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { connect } from "react-redux"
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DatePicker from "react-datepicker";
 import Button from 'react-bootstrap/Button';
-// import Dropdown from 'react-bootstrap/Dropdown';
+
+import { addOrder } from '../../actions'
 
 class DetailSection extends Component {
     render() {
@@ -17,61 +19,88 @@ class DetailSection extends Component {
         )
     }
 }
-class OrdenDetail extends Component {
-    
-    newDetail = {
-        extId: "",
-        longName: "",
-        phone: "",
-        email: "",
-        address: "",
-        caracteristics: "",
-        comments: "",
-        fabric: "",
-    }
 
-    constructor(props) {
-        super(props);
-    
 
-        this.state = {
-            detail: this.newDetail
-        };
-    }
+function orderDetail(props) {
+        // render() {
+        // const detail = this.newDetail;
+        const newOrder = {
+            _id: "x",
+            extId: "",
+            longName: "",
+            phone: "",
+            email: "",
+            address: "",
+            caracteristics: [{
+                text: "",
+                user: null,
+                date: null
+            }],
+            comments: [{
+                text: "",
+                user: null,
+                date: null
+            }],
+            fabric: [{
+                text: "",
+                user: null,
+                date: null
+            }],
+        }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            detail: nextProps.detail
-        })
-    }
+        const [orderData, setOrderData] = useState(newOrder)
 
-    detailSection = (title) => {
-        return title;
-    }
+        const handleSubmit = (event) => {
+            event.preventDefault();
+            props.addOrder({newOrder: orderData});
+            props.handleClose()
+        }
 
-    render() {
-        const detail = this.newDetail;
         return (
-            <div>
+            <>
                 {/* <h4>Factura N. {detail.extId}</h4> */}
-                <Form>
+                <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Caracteristicas</Form.Label>
                         <Form.Control size="sm" as="textarea" rows="5" 
-                            //value={detail.caracteristics} 
+                            value={orderData.caracteristics.text} 
+                            onChange={event => setOrderData({
+                                ...orderData, 
+                                caracteristics: [{
+                                    text: event.target.value,
+                                    user: "admin",
+                                    date: new Date()
+                                }]
+                            })}
+                            />
+                    </Form.Group>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Tela</Form.Label>
+                        <Form.Control size="sm" as="textarea" rows="5" 
+                            value={orderData.fabric.text} 
+                            onChange={event => setOrderData({
+                                ...orderData, 
+                                fabric: [{
+                                    text: event.target.value,
+                                    user: "admin",
+                                    date: new Date()
+                                }]
+                            })}
                         />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Comentarios</Form.Label>
                         <Form.Control size="sm" as="textarea" rows="5" 
-                            //value={detail.comments} 
-                        />
-                    </Form.Group>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label>Tela</Form.Label>
-                        <Form.Control size="sm" as="textarea" rows="5" 
-                            //value={detail.fabric} 
-                        />
+                            value={orderData.comments.text} 
+                            onChange={event => setOrderData({
+                                ...orderData, 
+                                comments: [{
+                                    text: event.target.value,
+                                    user: "admin",
+                                    date: new Date()
+                                }]
+                            })}
+                            />
                     </Form.Group>
 
                     <DetailSection>DATOS DEL PEDIDO</DetailSection>
@@ -192,15 +221,29 @@ class OrdenDetail extends Component {
 
                     <div>
                         <Button 
+                            type="submit"
                             variant="outline-success" 
                             block
                         >Guardar Orden</Button>
                     </div>
 
                 </Form>
-            </div>
+            </>
         );
-    }
+    // }
 }
 
-export default OrdenDetail;
+const mapStateToProps = null
+// state => {
+//     return {
+//         thisDate: state.thisDate,
+//         orders: state.orders,
+//         status: state.status,
+//     }
+// }
+
+const mapDispatchToProps = {
+    addOrder,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(orderDetail);

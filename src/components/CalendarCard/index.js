@@ -21,9 +21,13 @@ import {
     faPrint
 } from '@fortawesome/free-solid-svg-icons'
 import EditableText from '../EditableText'
+import Skeleton from '../SkeletonText/Skeleton'
+
 moment.locale('es')
 
 function calendarCard({data}){
+
+    const empty = !data._id;
 
     const paymentList = [
         "Pagó todo",
@@ -50,30 +54,62 @@ function calendarCard({data}){
             <div className={style.title}>DATOS</div>
             
             <div className={style.order}>
-                <p>
-                    <FontAwesomeIcon icon={faFileInvoice} className={style.dataIcon} />
-                    <strong>Factura: </strong>{data.extID}
-                </p>
-                <p>
-                    <FontAwesomeIcon icon={faCalendar} className={style.dataIcon} />
-                    <strong>Pedido: </strong>{moment(data.entryDate).format("DD/MM/YYYY")}
-                </p>
-                <p>
-                    <FontAwesomeIcon icon={faCalendarAlt} className={style.dataIcon} />
-                    <strong>Entrega: </strong>{moment(data.deliveryDate).format("DD/MM/YYYY")}
-                </p>
-                <p>
-                    <FontAwesomeIcon icon={faCheckSquare} className={style.dataIcon} />
-                    <strong>Status: </strong>{data.status}
-                </p>
-                <p>
-                    <FontAwesomeIcon icon={faCheckSquare} className={style.dataIcon} />
-                    <strong>Pago: </strong>{paymentList[data.paymentType]}
-                </p>
-                <p>
-                    <FontAwesomeIcon icon={faTruck} className={style.dataIcon} />
-                    <strong>Retiro: </strong>{data.deliveryType}
-                </p>
+                <div className={style.orderContainer}>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faFileInvoice} className={style.dataIcon} />
+                            <strong>Factura: </strong>{data.extID}
+                        </>
+                        :
+                        <Skeleton height="14px" width="140px"/>
+                    }</p>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faCalendar} className={style.dataIcon} />
+                            <strong>Pedido: </strong>{moment(data.entryDate).format("DD/MM/YYYY")}
+                        </>
+                        :
+                        <Skeleton height="14px" width="150px"/>
+                    }</p>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faCalendarAlt} className={style.dataIcon} />
+                            <strong>Entrega: </strong>{moment(data.deliveryDate).format("DD/MM/YYYY")}
+                        </>
+                        :
+                        <Skeleton height="14px" width="120px"/>
+                    }</p>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faCheckSquare} className={style.dataIcon} />
+                            <strong>Status: </strong>{data.status}
+                        </>
+                        :
+                        <Skeleton height="14px" width="140px"/>
+                    }</p>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faCheckSquare} className={style.dataIcon} />
+                            <strong>Pago: </strong>{paymentList[data.paymentType]}
+                        </>
+                        :
+                        <Skeleton height="14px" width="150px"/>
+                    }</p>
+                    <p>{
+                        !empty ?
+                        <>
+                            <FontAwesomeIcon icon={faTruck} className={style.dataIcon} />
+                            <strong>Retiro: </strong>{data.deliveryType}
+                        </>
+                        :
+                        <Skeleton height="14px" width="120px"/>
+                    }</p>
+                </div>
                 <p className={style.statusRow}>
                     <FontAwesomeIcon icon={faAddressCard} className={style.statusIcon} />
                     <span className={style.statusText}>DATOS INC.</span>
@@ -87,18 +123,39 @@ function calendarCard({data}){
             <EditableText data={data.comments} />
             <div className={style.data}>
                 <div className={style.dataContainer}>
-                    <p className={style.name}>{data.longName}</p>
+                    <p className={style.name}>{data.longName || <Skeleton height="18px" width="100px"/>}</p>
                     <p>
-                        <FontAwesomeIcon icon={faMapMarkerAlt} className={style.dataIcon} />
-                        {data.address}
+                        {
+                            !empty ?
+                            <>
+                                <FontAwesomeIcon icon={faMapMarkerAlt} className={style.dataIcon} />
+                                {data.address}
+                            </>
+                            :
+                            <Skeleton height="18px" width="200px"/>
+                        }
                     </p>
                     <p>
-                        <FontAwesomeIcon icon={faPhone} className={style.dataIcon} />
-                        {data.telephone}
+                        {
+                            !empty ? 
+                            <>
+                                <FontAwesomeIcon icon={faPhone} className={style.dataIcon} />
+                                {data.telephone}
+                            </>
+                            :
+                            <Skeleton height="18px" width="150px"/>                            
+                        }
                     </p>
                     <p>
-                        <FontAwesomeIcon icon={faEnvelope} className={style.dataIcon} />
-                        <a href={`mailto:${data.email}`}>{data.email}</a>
+                        {
+                            !empty ? 
+                            <>
+                                <FontAwesomeIcon icon={faEnvelope} className={style.dataIcon} />
+                                <a href={`mailto:${data.email}`}>{data.email}</a>
+                            </>
+                            :
+                            <Skeleton height="18px" width="180px"/>                            
+                        }
                     </p>
                 </div>
 
@@ -107,22 +164,22 @@ function calendarCard({data}){
                 </div>
 
                 <div className={style.actions}>
-                    <button className="btn btn-outline-info" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-info" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPen} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-info" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-info" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPrint} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-danger" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-danger" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faTrash} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-success" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-success" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
                     </button>
-                    <button className="btn btn-outline-success" onClick={() => {alert("test")}}>
+                    <button disabled={empty} className="btn btn-outline-success" onClick={() => {alert("test")}}>
                         <FontAwesomeIcon icon={faPaperclip} className={style.actionIcon} />
                     </button>
 

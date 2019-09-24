@@ -1,83 +1,30 @@
 import React, { Component, Fragment } from "react";
-import Cookie from "js-cookie";
+import { connect } from "react-redux"
 import moment from "moment";
 
-// import style from './style.module.scss'
 import UserMain from "../../layouts/UserMain";
 import CalendarCard from "../CalendarCard";
 import NoResults from "../NoResults";
-import Loading from "../Loading";
+import { getOrdersByDate } from '../../actions'
 
 class Calendar extends Component {
-    constructor(props) {
-        super(props);
-
-        let dateString = props.match.params.date
-            ? props.match.params.date
-            : moment().format("YYYY-MM-DD");
-
-        this.state = {
-            // openDetail: false,
-            // rowDetail: null,
-            dateString,
-            orders: [],
-            status: "loading",
-        };
-    }
-
-    getData = (filters = null) => {
-        console.log(`Filters: ${filters}`)
-        const endpoint = `${process.env.REACT_APP_API_ENDPOINT}orders?date=${this.state.dateString}`;
-        const bearer = Cookie.get("auth-token");
-        fetch(endpoint, {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${bearer}`,
-            },
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response.data);
-                this.setState({
-                    orders: response.data,
-                    status: "done",
-                });
-            })
-            .catch(error => {
-                console.warn(error);
-                this.props.history.push("/login");
-            });
-    };
-
-    // handleRowClick = (row) => {
-    //     //console.log(row.id);
-    //     this.setState({
-    //         openDetail: true,
-    //         rowDetail: row
-    //     })
-    // }
 
     handleDateChange = date => {
-        let newDate = moment(date).format("YYYY-MM-DD");
-
-        this.setState({
-            status: "loading",
-            dateString: newDate,
-        });
-
-        this.props.history.push(`/calendar/${newDate}`);
+        
+        let dateString = moment(date).format("YYYY-MM-DD");
+        this.props.getOrdersByDate({dateString});
+        this.props.history.push(`/calendar/${dateString}`);
     };
 
     componentDidMount() {
-        this.getData();
+
+        let dateString = this.props.match.params.date
+            ? this.props.match.params.date
+            : moment().format("YYYY-MM-DD");
+        
+        this.props.getOrdersByDate({dateString: dateString});        
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.dateString !== this.state.dateString) {
-            this.getData();
-        }
-    }
-    
     handleOpenFilters = (open = true) => {
         this.setState({
             openFilters: open,
@@ -85,13 +32,15 @@ class Calendar extends Component {
     }
 
     renderCalendar = () => {
-        if (this.state.status === "loading") return <Loading />;
-        if (this.state.orders.length === 0) return <NoResults />;
+        if (this.props.status === "loading") {
+            return [1,2,3].map(item => <CalendarCard key={item} data={{}} />);
+        }
+        if (this.props.orders.length === 0) return <NoResults />;
 
         return (
             <Fragment>
                 { 
-                    this.state.orders.map(item => (
+                    this.props.orders.map(item => (
                         <CalendarCard key={item._id} data={item} />
                     )) 
                 }
@@ -102,11 +51,9 @@ class Calendar extends Component {
     render() {
         return (
             <UserMain
-                openDetail={this.state.openDetail}
-                dateString={this.state.dateString}
+                dateString={this.props.thisDate}
                 onDateChange={this.handleDateChange}
                 handleOpenFilters = {this.handleOpenFilters}
-                handleGetData = {this.getData}
             >
                 {this.renderCalendar()}
             </UserMain>
@@ -114,4 +61,16 @@ class Calendar extends Component {
     }
 }
 
-export default Calendar;
+const mapStateToProps = state => {
+    return {
+        thisDate: state.thisDate,
+        orders: state.orders,
+        status: state.status,
+    }
+}
+const mapDispatchToProps = {
+    getOrdersByDate,
+}
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar);

@@ -49,6 +49,7 @@ $scrollSize: 6px;
 
             scrollbar-color: $color3 transparent;
             scrollbar-width: thin;
+            height: 94px;
             
             &::-webkit-scrollbar {
                 width: 100%;            
@@ -97,7 +98,12 @@ $scrollSize: 6px;
 
     & > .order {
 
-        & > p {
+        & .orderContainer {
+            height: 130px;
+            overflow-y: hidden;
+        }
+
+        & p {
             margin: 0 5px 0 0;
             white-space: nowrap;
         }
@@ -111,7 +117,6 @@ $scrollSize: 6px;
             font-weight: bold;
             line-height: 12px;
             color: $color__darker2;
-            margin-top: 5px;
             white-space: normal;
 
             & > .statusIcon {
@@ -127,5 +132,4 @@ $scrollSize: 6px;
 
         }
     }
-
 }

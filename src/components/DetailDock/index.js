@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
 import Dock from 'react-dock';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faPen, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
 // import Nav from 'react-bootstrap/Nav';
 // import DatePicker from "react-datepicker";
 
-import OrdenDetail from './OrdenDetail';
+import OrderDetail from './OrderDetail';
 import style from './style.module.scss'
 
 class DetailDock extends Component {
@@ -55,7 +54,10 @@ class DetailDock extends Component {
                         <h3><FontAwesomeIcon icon={faFileAlt} /> Nueva Orden</h3>
                         {
                             // this.state.rowDetail ?
-                            <OrdenDetail detail={this.state.rowDetail} ></OrdenDetail> 
+                            <OrderDetail 
+                                detail={this.state.rowDetail} 
+                                handleClose={this.handleClose}
+                                ></OrderDetail> 
                             // :
                             // <div>No hay ninguna factura seleccionada</div>
                         }

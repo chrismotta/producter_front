@@ -15,7 +15,8 @@ import {
     faUser,
     faUserCircle,
     faFilter,
-    faFileAlt
+    faFileAlt,
+    faBell
 } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../img/logo.jpg";
@@ -74,6 +75,7 @@ class NavigationBar extends Component {
 
                 <Button
                     variant="outline-light"
+                    size="sm"
                     style={{ marginRight: "20px" }}
                     onClick={() => this.props.handleOpenDetail(true, null)}
                 >
@@ -81,6 +83,7 @@ class NavigationBar extends Component {
                 </Button> 
                 <Button
                     variant="outline-light"
+                    size="sm"
                     style={{ marginRight: "20px" }}
                     onClick={() => this.props.handleOpenFilters(true)}
                     >
@@ -89,11 +92,30 @@ class NavigationBar extends Component {
                 <Form inline style={{ marginRight: "20px" }}>
                     <FormControl
                         type="text"
+                        size="sm"
                         placeholder="Nombre o Factura N°"
                         className="mr-sm-2"
                     />
-                    <Button variant="outline-info">Buscar</Button>
+                    <Button 
+                        variant="outline-info"
+                        size="sm"
+                        >Buscar</Button>
                 </Form>
+
+                <Dropdown as={Nav.Item} className="justify-content-end">
+                    <Dropdown.Toggle as={Nav.Link} 
+                        drop={null} >
+                        <FontAwesomeIcon
+                            icon={faBell}
+                            className="text-info"
+                            />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu alignRight>
+                        <Dropdown.Item>Notificacion 1</Dropdown.Item>
+                        <Dropdown.Item>Notificacion 2</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
                 <Dropdown as={Nav.Item} className="justify-content-end">
                     <Dropdown.Toggle as={Nav.Link}>
                         <FontAwesomeIcon
@@ -114,7 +136,6 @@ class NavigationBar extends Component {
                                 className="text-dark"
                                 size="8x"
                             />
-                            {/* <Image src="holder.js/171x180" roundedCircle /> */}
                         </Dropdown.Header>
                         <Dropdown.Item>Datos Personales</Dropdown.Item>
                         <Dropdown.Item>Cambiar Contraseña</Dropdown.Item>

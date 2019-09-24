@@ -36,7 +36,7 @@ class Login extends Component {
         })
     }
 
-    handleOnSubmit = event => {
+    handleSubmit = event => {
         event.preventDefault();
         const authEndpoint = `${process.env.REACT_APP_API_ENDPOINT}auth/token`;
         const {username, password} = this.state.userData;
@@ -66,7 +66,7 @@ class Login extends Component {
                 <Card style={{ width: '18rem', margin: 'auto', background: 'burlywood' }}>
                     <Card.Img variant="top" src={logo} style={{ mixBlendMode: 'screen' }} />
                     <Card.Body>
-                        <Form onSubmit={this.handleOnSubmit}>
+                        <Form onSubmit={this.handleSubmit}>
                             <Form.Group>
                                 <Form.Label>Usuario</Form.Label>
                                 <Form.Control 
