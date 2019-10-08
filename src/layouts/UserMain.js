@@ -11,7 +11,6 @@ class UserMain extends Component {
         this.state = {
             openDetail: false,
             openFilters: false,
-            rowDetail: null,
         };
     }
 
@@ -49,7 +48,7 @@ class UserMain extends Component {
                 <DetailDock
                     handleOpen = {this.handleOpenDetail} 
                     openDock = {this.state.openDetail}
-                    rowDetail = {this.state.rowDetail}
+                    editOrder = {this.props.editOrder}
                 />
                 <FiltersDock
                     handleOpen={this.handleOpenFilters}

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import Skeleton from "../SkeletonText/Skeleton";
 
-export default function({ data }) {
+const EditableText = ({ data }) => {
     const [showAddButton, setShowAddButton] = useState(false)
     const [showAddInput, setShowAddInput] = useState(false)
     const [quotesList, setQuotesList] = useState(data)
@@ -112,3 +112,5 @@ export default function({ data }) {
         </div>
     );
 }
+
+export default EditableText

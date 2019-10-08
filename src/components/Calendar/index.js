@@ -1,64 +1,70 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux"
-import moment from "moment";
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import moment from 'moment'
 
-import UserMain from "../../layouts/UserMain";
-import CalendarCard from "../CalendarCard";
-import NoResults from "../NoResults";
+import UserMain from '../../layouts/UserMain'
+import CalendarCard from '../CalendarCard'
+import NoResults from '../NoResults'
 import { getOrdersByDate } from '../../actions'
 
-class Calendar extends Component {
+const Calendar = (props) => {
 
-    handleDateChange = date => {
-        
-        let dateString = moment(date).format("YYYY-MM-DD");
-        this.props.getOrdersByDate({dateString});
-        this.props.history.push(`/calendar/${dateString}`);
-    };
-
-    componentDidMount() {
-
-        let dateString = this.props.match.params.date
-            ? this.props.match.params.date
-            : moment().format("YYYY-MM-DD");
-        
-        this.props.getOrdersByDate({dateString: dateString});        
+    const [editOrder, setEditOrder] = useState(null)
+    
+    const handleDateChange = date => {
+        let dateString = moment(date).format('YYYY-MM-DD')
+        props.getOrdersByDate({ dateString })
+        props.history.push(`/calendar/${dateString}`)
     }
 
-    handleOpenFilters = (open = true) => {
-        this.setState({
-            openFilters: open,
-        })
-    }
+    useEffect(
+        () => {
+            let dateString = props.match.params.date
+                ? props.match.params.date
+                : moment().format('YYYY-MM-DD')
+    
+            props.getOrdersByDate({ dateString: dateString })
+        },
+        []
+    )
 
-    renderCalendar = () => {
-        if (this.props.status === "loading") {
-            return [1,2,3].map(item => <CalendarCard key={item} data={{}} />);
+    const handleEditOrder = orderId => {
+        let editOrder = props.orders.find(order => (order._id = orderId))
+        console.log(editOrder)
+        if (editOrder) {
+            setEditOrder(editOrder)
         }
-        if (this.props.orders.length === 0) return <NoResults />;
-
-        return (
-            <Fragment>
-                { 
-                    this.props.orders.map(item => (
-                        <CalendarCard key={item._id} data={item} />
-                    )) 
-                }
-            </Fragment>
-        );
-    };
-
-    render() {
-        return (
-            <UserMain
-                dateString={this.props.thisDate}
-                onDateChange={this.handleDateChange}
-                handleOpenFilters = {this.handleOpenFilters}
-            >
-                {this.renderCalendar()}
-            </UserMain>
-        );
     }
+
+    const renderCalendar = () => {
+        
+        if (props.status === 'loading') {
+            return [1, 2, 3].map(item => <CalendarCard key={item} data={{}} />)
+        }
+        if (!props.orders || props.orders.length === 0) return <NoResults />
+
+        return (
+            <>
+                {props.orders.map(item => (
+                    <CalendarCard
+                        key={item._id}
+                        data={item}
+                        editOrder={handleEditOrder}
+                    />
+                ))}
+            </>
+        )
+    }
+
+    return (
+        <UserMain
+            dateString={props.thisDate}
+            onDateChange={handleDateChange}
+            editOrder={editOrder}
+        >
+            {renderCalendar()}
+        </UserMain>
+    )
 }
 
 const mapStateToProps = state => {
@@ -71,6 +77,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     getOrdersByDate,
 }
-  
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calendar);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Calendar)

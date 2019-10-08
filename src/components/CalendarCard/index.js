@@ -25,7 +25,7 @@ import Skeleton from '../SkeletonText/Skeleton'
 
 moment.locale('es')
 
-function calendarCard({data}){
+const CalendarCard = ({data, editOrder}) => {
 
     const empty = !data._id;
 
@@ -36,7 +36,7 @@ function calendarCard({data}){
     ]
 
     return (
-        <div className={style.calendarcard__container}>
+        <div className={style.calendarcard__container} data-id={data._id}>
             
             <div className={style.title}>ORDEN</div>
             <div className={style.title}>
@@ -164,7 +164,10 @@ function calendarCard({data}){
                 </div>
 
                 <div className={style.actions}>
-                    <button disabled={empty} className="btn btn-outline-info" onClick={() => {alert("test")}}>
+                    <button 
+                        disabled={empty} 
+                        className="btn btn-outline-info" 
+                        onClick={() => editOrder(data._id)}>
                         <FontAwesomeIcon icon={faPen} className={style.actionIcon} />
                     </button>
                     <button disabled={empty} className="btn btn-outline-info" onClick={() => {alert("test")}}>
@@ -190,4 +193,4 @@ function calendarCard({data}){
     )
 }
 
-export default calendarCard
+export default CalendarCard
