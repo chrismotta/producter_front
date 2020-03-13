@@ -1,10 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Form,
+  ButtonGroup,
+  ToggleButton,
+  ButtonToolbar,
+  ToggleButtonGroup
+} from "react-bootstrap";
 import firebase from "../../config/firebase";
 import "firebase/firestore";
 
 function Admin() {
   const db = firebase.firestore();
+  const FieldValue = firebase.firestore.FieldValue;
+  console.log("TCL: Admin -> firebase", firebase);
+  console.log("TCL: Admin -> firebase.firestore", firebase.firestore);
+  console.log("TCL: Admin -> FieldValue", FieldValue);
 
   const [usersList, setUsersList] = useState([]);
 
@@ -62,9 +74,12 @@ function Admin() {
   };
 
   const handleDelete = event => {
-    db.collection("users")
-      .doc(event.target.dataset.uid)
-      .delete();
+    var user = db.collection("users").doc(event.target.dataset.uid);
+    // var removeUser = user.update({
+    //   email: FieldValue.delete()
+    // });
+
+    user.delete();
   };
 
   return (
@@ -120,6 +135,24 @@ function Admin() {
                   autoComplete="password"
                 />
               </Form.Group>
+              <Form.Group>
+                <ButtonToolbar>
+                  <ToggleButtonGroup type="checkbox" defaultValue={[]}>
+                    <ToggleButton variant="outline-secondary" value={1}>
+                      Admin
+                    </ToggleButton>
+                    <ToggleButton variant="outline-secondary" value={4}>
+                      Atención
+                    </ToggleButton>
+                    <ToggleButton variant="outline-secondary" value={2}>
+                      Taller
+                    </ToggleButton>
+                    <ToggleButton variant="outline-secondary" value={3}>
+                      Showroom
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                </ButtonToolbar>
+              </Form.Group>
               <Button variant="info" type="submit" style={{ width: "100%" }}>
                 Enviar
               </Button>
@@ -158,3 +191,32 @@ function Admin() {
 }
 
 export default Admin;
+
+
+const Form = ()=>{
+
+  useInput((e)=>{
+    const [input, setInput] = useState("")
+    setInput(e.target.value)
+    return {value: input, onChange: setInput}
+  })
+
+  const nombre = useInput()
+  const apellido = useInput()
+
+  // const [apellido, setApellido] = useState("")
+  // const handleChangeNombre = (e) => {
+  //   setNombre(e.target.value)
+  // }
+  // const handleChangeApellido = (e) => {
+  //   setApellido(e.target.value)
+  // }
+  
+  return (
+    <>
+    <input {...nombre} />
+    <input {...apellido} />
+    {/* <input value={apellido} onChange={handleChangeApellido} /> */}
+    </>
+  )
+}
